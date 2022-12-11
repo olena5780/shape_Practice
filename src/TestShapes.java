@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -8,7 +9,28 @@ import java.util.ArrayList;
  */
 
 public class TestShapes {
-    public static void main(String[] args) {
+    public static <ArraysList> void main(String[] args) {
+
+        double width = ScannerHelper.getDouble(Questions.widthOfRectangle);
+        double height = ScannerHelper.getDouble(Questions.heightOfRectangle);
+        double side = ScannerHelper.getDouble(Questions.sideOfSquare);
+        double radius = ScannerHelper.getDouble(Questions.radiusOfCircle);
+
+        Circle c = new Circle(radius);
+        Rectangle r = new Rectangle(width, height);
+        Square s = new Square(side);
+
+        ArrayList<Shape> shapes = new ArrayList<>(Arrays.asList(c, r, s));
+
+        System.out.println(c);
+        System.out.println();
+        System.out.println(r);
+        System.out.println();
+        System.out.println(s);
+        System.out.println();
+
+        System.out.println(largestArea(c, r, s).getClass().getSimpleName() + " has the largest area as " + largestArea(c, r, s).area());
+
 
         /*
         This will be our actual program that we request some information from user to create 3 objects
@@ -42,5 +64,10 @@ public class TestShapes {
          */
 
 
+    }
+    public static Shape largestArea(Circle c, Rectangle r, Square s){
+        if(c.area() > r.area() && c.area() > s.area()) return c;
+        else if (r.area() > c.area() && r.area() > s.area()) return r;
+        return s;
     }
 }
